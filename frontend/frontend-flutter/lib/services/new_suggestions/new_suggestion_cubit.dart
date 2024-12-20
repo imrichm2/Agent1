@@ -153,9 +153,9 @@ class NewSuggestionCubit extends Cubit<NewSuggestionState> {
 
         //Adding scenarioNumber + ":" and ":userGrouping" to have same format as for Business KPI questions
         question1 = "$scenarioNumber:" + question1 + ":" + userGrouping!;
-        question2 = "$scenarioNumber:" + question2 + ":" + userGrouping!;
-        question3 = "$scenarioNumber:" + question3 + ":" + userGrouping!;
-        question4 = "$scenarioNumber:" + question4 + ":" + userGrouping!;
+        question2 = "$scenarioNumber:" + question2 + ":" + userGrouping;
+        question3 = "$scenarioNumber:" + question3 + ":" + userGrouping;
+        question4 = "$scenarioNumber:" + question4 + ":" + userGrouping;
 
         print(
             'NewSuggestionCubit: generateNewSuggestions() : Not a canned question : question1 = ${question1}');

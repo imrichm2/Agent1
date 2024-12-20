@@ -37,8 +37,7 @@ class UpdateStepperState extends Equatable {
         this.message!,
         this.stateStepper!,
         this.isActiveStepper!,
-        this.debugInfo!
-      ];
+        this.debugInfo];
 
   UpdateStepperState copyWith(
       {StepperStatus? status,

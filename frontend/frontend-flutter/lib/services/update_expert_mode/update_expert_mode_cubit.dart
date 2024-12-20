@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:ttmd/services/update_expert_mode/update_expert_mode_state.dart';
 
-import '../../utils/TextToDocParameter.dart';
 
 
 class UpdateExpertModeCubit extends Cubit<UpdateExpertModeState> {

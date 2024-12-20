@@ -374,5 +374,6 @@ class DisclaimerState extends State<Disclaimer> {
         return res;
       }
     }
+    return null;
   }
 }

@@ -342,7 +342,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
       //graphConfig = rep![2] as GraphConfig;
       dataViz = rep![2];
 
-      if ((rep![0] as String).length == 0) {
+      if ((rep[0] as String).length == 0) {
         //knownDB
         rep[0] =
             '[{"response": "The request did not return meaningful information. It could be because the question has not been formulated properly or some context is missing."}]';
@@ -411,8 +411,8 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
             "imageId": imageId,
             "dataSource": null,
             "tableKey": tableKey.toString(),
-            "stream": rep![4] as Stream<BaseChunk<Object>> ?? null,
-            "stopWatch": rep![5] as Stopwatch ?? null
+            "stream": rep[4] as Stream<BaseChunk<Object>> ?? null,
+            "stopWatch": rep[5] as Stopwatch ?? null
           });
 
       _addMessage(customMessage);
@@ -608,9 +608,9 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
           stateStepper: StepState.complete,
           isActiveStepper: true,
           debugInfo: StepperExpertInfo(
-            uri: url!.host + url!.path,
+            uri: url.host + url.path,
             body: body,
-            header: jsonEncode(_headers!),
+            header: jsonEncode(_headers),
             response: responsePalMBody,
             summary: finalAnswer,
             statusCode: _response.statusCode,
@@ -656,9 +656,8 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
       dataList.add(list.elementAt(i) as String);
     }
 
-    if (dataList is List<String>)
-      print(
-          'BarGraph: transfromDynamicListToStringList() :  dataList is of type List<String>');
+    print(
+        'BarGraph: transfromDynamicListToStringList() :  dataList is of type List<String>');
 
     print(
         'BarGraph: transfromDynamicListToStringList() :  dataList = $dataList');
@@ -1189,18 +1188,16 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
     //if (imageKey != "no_image") {
       print('Bot : copyGraphToClipBoard() : imageKey != "no_image"');
       print('Bot : copyGraphToClipBoard() : _graphsImagesMap.length = ${_graphsImagesMap.length}');
-      Uint8List imgBytes = _graphsImagesMap[imageKey!]!;
+      Uint8List imgBytes = _graphsImagesMap[imageKey]!;
 
-      if (imgBytes != null) {
-        print('Bot : copyGraphToClipBoard() : imgBytes != null');
-        final base64Image = base64Encode(imgBytes);
+      print('Bot : copyGraphToClipBoard() : imgBytes != null');
+      final base64Image = base64Encode(imgBytes);
 
-        try {
-          js.context.callMethod('copyBase64ImageToClipboard', [base64Image]);
+      try {
+        js.context.callMethod('copyBase64ImageToClipboard', [base64Image]);
 
-        } catch (e) {
-          print('Bot : copyGraphToClipBoard() : EXCEPTION :  e = $e');
-        }
+      } catch (e) {
+        print('Bot : copyGraphToClipBoard() : EXCEPTION :  e = $e');
       }
     } else if (summaryText != null || summaryText.length > 0) {
       print('Bot : copyGraphToClipBoard() : summaryText != null || summaryText.length > 0');
@@ -1271,20 +1268,20 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
 
     print('Bot : getChatResponseNew() : responsePalMBody = $responsePalMBody');
 
-    var error = pickFromJson(responsePalMBody!, 'Error').asStringOrNull();
+    var error = pickFromJson(responsePalMBody, 'Error').asStringOrNull();
 
     print('Bot : getChatResponseNew() : error = $error');
     print(
         'Bot : getChatResponseNew() : _response.statusCode = ${_response.statusCode}');
 
     if (_response.statusCode == 200 &&
-        responsePalMBody!.toLowerCase().contains("select") &&
+        responsePalMBody.toLowerCase().contains("select") &&
         (error!.length == 0 ?? false)) {
       print(
           'Bot : getChatResponseNew() : _response.statusCode == 200 && (error!.length == 0 ?? false )');
 
       TextToDocParameter.sessionId =
-          pickFromJson(responsePalMBody!, 'SessionID').asStringOrNull()!;
+          pickFromJson(responsePalMBody, 'SessionID').asStringOrNull()!;
 
       print(
           'Bot : getChatResponseNew() : _response.statusCode == 200 && (error!.length == 0 ?? false ) : TextToDocParameter.sessionId = ${TextToDocParameter.sessionId}');
@@ -1351,7 +1348,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
       if (TextToDocParameter.anonymized_data) {
         print(
             'Bot : getChatResponseNew() : tabular results: TextToDocParameter.anonymized_data = ${TextToDocParameter.anonymized_data}');
-        jsonResponseRunQuery = anonymizedData(jsonResponseRunQuery!);
+        jsonResponseRunQuery = anonymizedData(jsonResponseRunQuery);
       }
 
       //return extractContent(_responseTabResults.body, id, user: user!);
@@ -1415,7 +1412,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
     print(
         "bot() : extractContentGenerateSQL() : generatedSQLText = ${generatedSQLText}; ");
 
-    return generatedSQLText!;
+    return generatedSQLText;
   }
 
   Future<List<Object>> extractContentResultsOpenDataQnA(
@@ -1439,10 +1436,10 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
     String? error = "";
 
     error = pickFromJson(jsonResponseRunQuery!, 'Error').asStringOrNull();
-    knownDB = pickFromJson(jsonResponseRunQuery!, 'KnownDB').asStringOrNull();
-    var responseCode = pickFromJson(jsonResponseRunQuery!, 'ResponseCode');
+    knownDB = pickFromJson(jsonResponseRunQuery, 'KnownDB').asStringOrNull();
+    var responseCode = pickFromJson(jsonResponseRunQuery, 'ResponseCode');
     naturalResponseText =
-        pickFromJson(jsonResponseRunQuery!, 'NaturalResponse').asStringOrNull();
+        pickFromJson(jsonResponseRunQuery, 'NaturalResponse').asStringOrNull();
 
     print(
         "bot() : extractContentResultsOpenDataQnA() : knownDB.length = ${knownDB!.length}; ");
@@ -1459,7 +1456,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
         stateStepper: StepState.complete,
         isActiveStepper: true,
         debugInfo: StepperExpertInfo(
-            uri: urlRunQuery!.host + urlRunQuery!.path,
+            uri: urlRunQuery!.host + urlRunQuery.path,
             body: bodyRunQuery,
             header: jsonEncode(headersRunQuery!),
             response: jsonResponseRunQuery
@@ -1476,7 +1473,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
     try {
       if (knownDB != "[]" && error!.length == 0 ?? false) {
         print("bot() : extractContentResults() : VALID ANSWER");
-        var knowDBJson = jsonDecode(knownDB!);
+        var knowDBJson = jsonDecode(knownDB);
         //Check if it is worth displaying data. If just one row is returned, no use.
         //if (true) {
         if ((knowDBJson!.length <= 1 && (knowDBJson![0] as Map).length <= 1) ||
@@ -1486,7 +1483,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
           isText = true;
           //Get graph description in case we want to display a graph
           googleChartVizRes = await getDataVisualization(
-              userQuestion!, knownDB!, generatedSQLText!);
+              userQuestion!, knownDB, generatedSQLText!);
 
           print(
               "bot() : extractContentResultsOpenDataQnA() : googleChartVizRes = ${googleChartVizRes}");
@@ -1496,7 +1493,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
           isText = false;
           //Get graph description in case we want to display a graph
           googleChartVizRes = await getDataVisualization(
-              userQuestion!, knownDB!, generatedSQLText!);
+              userQuestion!, knownDB, generatedSQLText!);
 
           print(
               "bot() : extractContentResultsOpenDataQnA() : googleChartVizRes = ${googleChartVizRes}");
@@ -1507,7 +1504,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
         //get ML summarize
         //textSummary = await getTextSummary(userQuestion!, knownDB!);
 
-        RespList.add(knownDB!);
+        RespList.add(knownDB);
         RespList.add(isText);
         RespList.add(googleChartVizRes!);
         RespList.add(naturalResponseText!.trim());
@@ -1523,7 +1520,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
       print("bot() : extractContentResultsOpenDataQnA() : EXCEPTION : $e");
     } finally {
       print("bot() : extractContentResultsOpenDataQnA() : FINALLY CLAUSE ");
-      RespList.add(knownDB!);
+      RespList.add(knownDB);
       RespList.add(isText);
       RespList.add(googleChartVizRes!);
       RespList.add(naturalResponseText!);
@@ -1879,7 +1876,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
     print("bot() : createPaginatedTable() : data = $data");
     List<DataColumn> dataColumnList = <DataColumn>[];
 
-    List<dynamic> dataList = jsonDecode(data!);
+    List<dynamic> dataList = jsonDecode(data);
 
     print("bot() : createPaginatedTable() : dataList = $dataList");
     print("bot() : createPaginatedTable() : dataList.length = ${dataList.length}");
@@ -1917,7 +1914,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
           headingRowColor: WidgetStateProperty.all(Colors.blue),
           rowsPerPage: 3, // Customize as needed
           columns: dataColumnList,
-          source: OpenDataQnASource(rowsList as List<DataRow>),
+          source: OpenDataQnASource(rowsList),
         );
     }
     else

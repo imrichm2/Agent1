@@ -17,7 +17,6 @@ import 'package:flutter_chat_ui/src/widgets/input/send_button.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'dart:html' as html;
 import '../services/new_suggestions/new_suggestion_cubit.dart';
-import '../services/new_suggestions/new_suggestion_state.dart';
 import 'TextToDocParameter.dart';
 
 /// A class that represents bottom bar widget with a text field, attachment and
@@ -352,10 +351,10 @@ class _InputState extends State<CustomInputField> {
 
     for (String userGrouping in userGroupingList) {
       var list = await getAllquestionsFromUserGroup(userGrouping);
-      resp.addAll((list as List<String>)
+      resp.addAll((list)
           .map((question) =>
           Suggestion(
-              suggestion: question, userGrouping: userGrouping!))
+              suggestion: question, userGrouping: userGrouping))
           .toList());
 
       print('CustomInputField: getAllquestions() : userGrouping = $userGrouping : resp.length = ${resp.length}');
@@ -512,7 +511,7 @@ class _InputState extends State<CustomInputField> {
       Future<List<Suggestion>>.delayed(
         Duration(milliseconds: 300),
         () => suggestionsList.where((entry) {
-          final nameLower = entry.suggestion!.toLowerCase();
+          final nameLower = entry.suggestion.toLowerCase();
           final patternLower = pattern.toLowerCase();//pattern.toLowerCase().split(' ').join('');
           return nameLower.contains(patternLower);
         }).toList(),

@@ -317,14 +317,7 @@ class SettingsState extends State<Settings> {
           TextToDocParameter.imported_questions = cfg["imported_questions"];
         });
 
-        if (TextToDocParameter.anonymized_data != null &&
-            TextToDocParameter.expert_mode != null &&
-            TextToDocParameter.endpoint_opendataqnq != null &&
-            TextToDocParameter.firestore_database_id != null &&
-            TextToDocParameter.firebase_app_name != null &&
-            TextToDocParameter.firestore_history_collection != null &&
-            TextToDocParameter.firestore_cfg_collection != null &&
-            TextToDocParameter.imported_questions != null
+        if (TextToDocParameter.expert_mode != null
         ) {
           print('Settings: importFrontEndCfgFile() : Trying to update front_end_flutter_cfg');
           try {

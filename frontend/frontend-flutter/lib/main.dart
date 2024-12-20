@@ -302,7 +302,7 @@ class _ContentTtmdState extends State<ContentTtmd> {
     int countEntries = 0;
 
     for (var entry in sortedByValueMap.entries) {
-      mostPopularQuestionsList!.add(entry.value);
+      mostPopularQuestionsList.add(entry.value);
       if (countEntries == 2 || countEntries == sortedByValueMap.length - 1)
         break;
       countEntries++;
@@ -319,7 +319,7 @@ class _ContentTtmdState extends State<ContentTtmd> {
 
     //Fill mostPopularQuestionsList with dummy entries if there are not 3 most popular questions
     for (int i = 0; i <= (2 - lenghtTmp); i++) {
-      mostPopularQuestionsList!.add(MostPopularQ("", 0, ""));
+      mostPopularQuestionsList.add(MostPopularQ("", 0, ""));
     }
 
     print(
@@ -330,7 +330,7 @@ class _ContentTtmdState extends State<ContentTtmd> {
     //Update the 3 most popular questions
     BlocProvider.of<UpdatePopularQuestionsCubit>(context)
         .updateMostPopularQuestions(
-            mostPopularQuestionsList: mostPopularQuestionsList!,
+            mostPopularQuestionsList: mostPopularQuestionsList,
             time: timeString);
 
     print("Main: _addData :  AFTER  : nodes.length = ${nodes.length}");
@@ -1081,7 +1081,7 @@ class _ContentTtmdState extends State<ContentTtmd> {
                                     onChanged: (String? value) {
                                       selectedValueNotifier.value = value!;
                                       TextToDocParameter.currentUserGrouping =
-                                          value!;
+                                          value;
                                       print(
                                           'Main: build() : DropdownButton : onChanged() : TextToDocParameter.currentUserGrouping => ${TextToDocParameter.currentUserGrouping}');
                                     },
@@ -1185,7 +1185,7 @@ class _ContentTtmdState extends State<ContentTtmd> {
                             Container(height: 100),
                             Image.asset(
                               //UNCOMMENT
-                              "assets/images/gemini.png"!,
+                              "assets/images/gemini.png",
                               height: 90,
                               width: 90,
                               fit: BoxFit.cover,
@@ -1474,7 +1474,7 @@ class _ContentTtmdState extends State<ContentTtmd> {
                           Container(height: 5),
                           // Add a subtitle widget
                           Text(
-                            subTitle!,
+                            subTitle,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!
@@ -1487,8 +1487,7 @@ class _ContentTtmdState extends State<ContentTtmd> {
                           // Add a text widget to display some text
                           Text(
                             text.length <= 35
-                                ? text!
-                                : text!.substring(0, 35) + ' ...',
+                                ? text: text.substring(0, 35) + ' ...',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
@@ -1769,7 +1768,7 @@ class _ContentTtmdState extends State<ContentTtmd> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
-                    imagePath!,
+                    imagePath,
                     height: 50,
                     width: 50,
                     fit: BoxFit.cover,
@@ -2617,7 +2616,7 @@ class _ContentTtmdState extends State<ContentTtmd> {
 
             finalNodeList.add(TreeNode<String>(
                 'Scenario $count - ${questionList[i][1]} - ${getQuestionCount(questionList, scenario_nameCurrent)}',
-                subNodes: nodeList!));
+                subNodes: nodeList));
             isNewScenario = false;
           }
           nodeTmp = "$count:" +
@@ -2661,7 +2660,7 @@ class _ContentTtmdState extends State<ContentTtmd> {
                 questionList[i][0]));
             nodeList!.add(TreeNode<String>(nodeTmp, subNodes: nodeEmbeddedList!));*/
             nodeList!
-                .add(TreeNode<String>(nodeTmp, subNodes: nodeEmbeddedList!));
+                .add(TreeNode<String>(nodeTmp, subNodes: nodeEmbeddedList));
           } else if ((questionList[i][3] as String).trim().toLowerCase() ==
                   "n" &&
               (questionList[i + 1][3] as String).trim().toLowerCase() == "n") {
@@ -2700,7 +2699,7 @@ class _ContentTtmdState extends State<ContentTtmd> {
 
           finalNodeList.add(TreeNode<String>(
               'Scenario $count - ${questionList[i][1]} - ${getQuestionCount(questionList, questionList[i][1])}',
-              subNodes: nodeList!));
+              subNodes: nodeList));
           isNewScenario = false;
 
           nodeTmp = "$count:" +
@@ -2711,7 +2710,7 @@ class _ContentTtmdState extends State<ContentTtmd> {
               questionList[i][0];
           print(
               "Main: createQuestionList() : i = $i : $scenario_nameCurrent != ${questionList[i][1]}  : nodeTmp = $nodeTmp");
-          nodeList!.add(TreeNode<String>(nodeTmp, subNodes: nodeEmbeddedList!));
+          nodeList.add(TreeNode<String>(nodeTmp, subNodes: nodeEmbeddedList));
           scenario_nameCurrent =
               (questionList[i][1] as String).trim().toLowerCase();
           print(
