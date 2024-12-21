@@ -270,7 +270,7 @@ class NewSuggestionCubit extends Cubit<NewSuggestionState> {
 
     final now = DateTime.now();
     dateTimeS = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
-    return dateTimeS!;
+    return dateTimeS;
   }
 
   List<String> pickUpNextQuestions(int scenarioNumber, String question) {

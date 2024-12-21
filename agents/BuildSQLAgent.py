@@ -1,6 +1,9 @@
 from abc import ABC
-from vertexai.language_models import CodeChatModel
-from vertexai.generative_models import GenerativeModel, Content, Part, GenerationConfig
+from google.cloud import aiplatform
+from google.cloud import language_v1
+from google.cloud.aiplatform import gapic as aiplatform_gapic
+from google.cloud.aiplatform.language_models import CodeChatModel
+from google.cloud.aiplatform.language_models import CodeChatModel, Content, Part, GenerationConfig
 from .core import Agent 
 import pandas as pd
 import json

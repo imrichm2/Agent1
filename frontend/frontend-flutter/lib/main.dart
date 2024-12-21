@@ -1378,7 +1378,7 @@ class _ContentTtmdState extends State<ContentTtmd> {
 
     final now = DateTime.now();
     dateTimeS = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
-    return dateTimeS!;
+    return dateTimeS;
   }
 
   Widget createCards(
@@ -2405,7 +2405,7 @@ class _ContentTtmdState extends State<ContentTtmd> {
       print(
           'Main: ttmd : importQuestions() : rowsAsListOfValues = ${rowsAsListOfValues}');
 
-      if (rowsAsListOfValues!.length < 2 ||
+      if (rowsAsListOfValues.length < 2 ||
           rowsAsListOfValues[0].length > 4 ||
           (rowsAsListOfValues[0].length <= 4 &&
               (rowsAsListOfValues[0][0] != "user_grouping" ||

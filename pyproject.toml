@@ -1,4 +1,5 @@
-[tool.poetry]
+
+exit()[tool.poetry]
 name = "opendataqna"
 version = "0.1.0"
 description = ""

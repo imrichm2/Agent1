@@ -13,7 +13,8 @@
     
     gcloud services enable firebase.googleapis.com --project=$PROJECT_ID # Enable firebase management API
 
-    npm install -g firebase-tools
+    
+    
 
     ```
     ```

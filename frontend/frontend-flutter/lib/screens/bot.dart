@@ -1092,7 +1092,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
     Uint8List? capturedImage =  await webViewController!.takeScreenshot();
 
     print('Bot : _generateImage() : capturedImage != null)');
-    _graphsImagesMap[imageId!] = capturedImage!;
+    _graphsImagesMap[imageId!] = capturedImage;
     //ShowCapturedWidget(context, capturedImage!);
 
     return capturedImage;
@@ -1442,7 +1442,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
         pickFromJson(jsonResponseRunQuery, 'NaturalResponse').asStringOrNull();
 
     print(
-        "bot() : extractContentResultsOpenDataQnA() : knownDB.length = ${knownDB!.length}; ");
+        "bot() : extractContentResultsOpenDataQnA() : knownDB.length = ${knownDB.length}; ");
     print(
         "bot() : extractContentResultsOpenDataQnA() : knownDB = ${knownDB}; ");
 
@@ -1471,7 +1471,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
         "main: extractContentResultsOpenDataQnA() : After BlocProvider.of<UpdateStepperCubit>(context).updateStepperStatusUploaded() : run_query");
 
     try {
-      if (knownDB != "[]" && error!.length == 0 ?? false) {
+      if (knownDB != "[]" && error.length == 0 ?? false) {
         print("bot() : extractContentResults() : VALID ANSWER");
         var knowDBJson = jsonDecode(knownDB);
         //Check if it is worth displaying data. If just one row is returned, no use.
@@ -1507,7 +1507,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
         RespList.add(knownDB);
         RespList.add(isText);
         RespList.add(googleChartVizRes!);
-        RespList.add(naturalResponseText!.trim());
+        RespList.add(naturalResponseText.trim());
       } else {
         print("bot() : extractContentResultsOpenDataQnA() : UNVALID ANSWER");
         RespList.add("");
@@ -1523,7 +1523,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
       RespList.add(knownDB);
       RespList.add(isText);
       RespList.add(googleChartVizRes!);
-      RespList.add(naturalResponseText!);
+      RespList.add(naturalResponseText);
       return RespList;
     }
   }
@@ -1706,7 +1706,7 @@ class BotState extends State<Bot> with SingleTickerProviderStateMixin {
 
     final now = DateTime.now();
     dateTimeS = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
-    return dateTimeS!;
+    return dateTimeS;
   }
 
   List<types.Message> get messages {

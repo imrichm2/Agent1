@@ -14,18 +14,6 @@ def is_root_dir():
         bool: True if either directory exists in the current directory, False otherwise.
     """
 
-
-config = configparser.ConfigParser()
-config.read('config.ini')
-
-try:
-    embedding_model = config['CONFIG']['EMBEDDING_MODEL']
-except KeyError as e:
-    print(f"KeyError: {e} not found in the configuration file.")
-    # Handle the missing key or section appropriately
-
-
-
     current_dir = os.getcwd()
     print("current dir: ", current_dir)
     notebooks_path = os.path.join(current_dir, "notebooks")
@@ -73,7 +61,7 @@ def format_prompt(context_prompt, **kwargs):
 
 
 # [CONFIG]
-embedding_model = config['CONFIG']['EMBEDDING_MODEL']
+EMBEDDING_MODEL = config['CONFIG']['EMBEDDING_MODEL']
 DESCRIPTION_MODEL = config['CONFIG']['DESCRIPTION_MODEL']
 # DATA_SOURCE = config['CONFIG']['DATA_SOURCE'] 
 VECTOR_STORE = config['CONFIG']['VECTOR_STORE']

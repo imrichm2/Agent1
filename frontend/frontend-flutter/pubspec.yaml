@@ -69,6 +69,8 @@ dependencies:
   flutter_inappwebview: ^6.0.0
   cloud_firestore: ^5.4.0
 
+  http: any
+  bloc: any
 dependency_overrides:
   libphonenumber_plugin: ^0.3.3
   libphonenumber_web: ^0.3.2

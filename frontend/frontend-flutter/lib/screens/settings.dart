@@ -317,37 +317,31 @@ class SettingsState extends State<Settings> {
           TextToDocParameter.imported_questions = cfg["imported_questions"];
         });
 
-        if (TextToDocParameter.expert_mode != null
-        ) {
-          print('Settings: importFrontEndCfgFile() : Trying to update front_end_flutter_cfg');
-          try {
-            widget.db
-                .collection("${TextToDocParameter.firestore_cfg_collection}")
-                .doc('${TextToDocParameter.userID}')
-                .set({
-              "endpoint_opendataqnq":
-                  "${TextToDocParameter.endpoint_opendataqnq}",
-              "firestore_database_id":
-                  "${TextToDocParameter.firestore_database_id}",
-              "expert_mode": TextToDocParameter.expert_mode,
-              "anonymized_data": TextToDocParameter.anonymized_data,
-              "firebase_app_name": "${TextToDocParameter.firebase_app_name}",
-              "firestore_history_collection": "${TextToDocParameter.firestore_history_collection}",
-              "firestore_cfg_collection": "${TextToDocParameter.firestore_cfg_collection}",
-              "imported_questions": "${TextToDocParameter.imported_questions}"
-            });
+        print('Settings: importFrontEndCfgFile() : Trying to update front_end_flutter_cfg');
+        try {
+          widget.db
+              .collection("${TextToDocParameter.firestore_cfg_collection}")
+              .doc('${TextToDocParameter.userID}')
+              .set({
+            "endpoint_opendataqnq":
+                "${TextToDocParameter.endpoint_opendataqnq}",
+            "firestore_database_id":
+                "${TextToDocParameter.firestore_database_id}",
+            "expert_mode": TextToDocParameter.expert_mode,
+            "anonymized_data": TextToDocParameter.anonymized_data,
+            "firebase_app_name": "${TextToDocParameter.firebase_app_name}",
+            "firestore_history_collection": "${TextToDocParameter.firestore_history_collection}",
+            "firestore_cfg_collection": "${TextToDocParameter.firestore_cfg_collection}",
+            "imported_questions": "${TextToDocParameter.imported_questions}"
+          });
 
-            showSuccessfulUploadMsg();
+          showSuccessfulUploadMsg();
 
-          } catch (e) {
-            print('Settings: importFrontEndCfgFile() : EXCEPTION : ${e}');
-            displayCfgUploadErrorMsg();
-          }
-        } else {
-          print('Settings: importFrontEndCfgFile() : some fields if cfg are null, could not update firestore_cfg_collection');
+        } catch (e) {
+          print('Settings: importFrontEndCfgFile() : EXCEPTION : ${e}');
           displayCfgUploadErrorMsg();
         }
-      }
+            }
     }
   }
 
